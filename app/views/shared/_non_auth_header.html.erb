@@ -1,0 +1,48 @@
+<header class="bg-white shadow">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center py-4">
+      <!-- Logo -->
+      <div class="flex-shrink-0">
+        <%= link_to root_path, class: "text-2xl font-bold text-red-500" do %>
+          Play Your Team
+        <% end %>
+      </div>
+
+      <!-- Navigation -->
+      <nav class="hidden md:flex space-x-6">
+        <%= link_to "Home", root_path, class: "text-gray-700 hover:text-red-500 transition" %>
+        <%= link_to "Features", "#", class: "text-gray-700 hover:text-red-500 transition" %>
+        <%= link_to "Pricing", pricing_path, class: "text-gray-700 hover:text-red-500 transition" %>
+        <%= link_to "Contact", "#", class: "text-gray-700 hover:text-red-500 transition" %>
+      </nav>
+
+      <!-- Auth Buttons -->
+      <div class="hidden md:flex items-center space-x-4">
+        <%= link_to "Log in", new_session_path, class: "text-gray-700 hover:text-red-500 transition" %>
+        <%= link_to "Sign up", new_registration_path, class: "bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition" %>
+      </div>
+
+      <!-- Mobile menu button -->
+      <div class="md:hidden">
+        <button type="button" class="text-gray-700 hover:text-red-500 focus:outline-none" data-action="click->dropdown#toggleMobile">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div class="md:hidden hidden" data-dropdown-target="mobileMenu">
+    <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+      <%= link_to "Home", root_path, class: "block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-red-500 hover:bg-gray-50" %>
+      <%= link_to "Features", "#", class: "block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-red-500 hover:bg-gray-50" %>
+      <%= link_to "Pricing", pricing_path, class: "block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-red-500 hover:bg-gray-50" %>
+      <%= link_to "Contact", "#", class: "block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-red-500 hover:bg-gray-50" %>
+      <%= link_to "Log in", new_session_path, class: "block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-red-500 hover:bg-gray-50" %>
+      <%= link_to "Sign up", new_registration_path, class: "block px-3 py-2 rounded-md text-base font-medium bg-red-500 text-white hover:bg-red-600" %>
+    </div>
+  </div>
+</header>
+

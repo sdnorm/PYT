@@ -1,0 +1,61 @@
+<header class="bg-white shadow">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center py-4">
+      <!-- Logo -->
+      <div class="flex-shrink-0">
+        <%= link_to root_path, class: "text-2xl font-bold text-navy-800" do %>
+          <!-- Replace with your actual logo or app name -->
+          Play Your Ground
+        <% end %>
+      </div>
+
+      <!-- Navigation -->
+      <nav class="hidden md:flex space-x-6">
+        <%= link_to "Dashboard", "#", class: "text-gray-700 hover:text-indigo-600" %>
+        <%= link_to "Projects", "#", class: "text-gray-700 hover:text-indigo-600" %>
+        <%= link_to "Tasks", "#", class: "text-gray-700 hover:text-indigo-600" %>
+      </nav>
+
+      <!-- User Menu -->
+      <div
+          data-controller="dropdown"
+          data-action="click@window->dropdown#hide touchstart@window->dropdown#hide keydown.up->dropdown#previousItem keydown.down->dropdown#nextItem keydown.esc->dropdown#hide"
+          class="inline-block relative">
+        <button data-action="dropdown#toggle:stop" class="flex items-center text-gray-700 hover:text-indigo-600 focus:outline-none">
+          <%= @current_user.email_address %>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="inline-block fill-current h-4 w-4"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path></svg>
+        </button>
+        <div data-dropdown-target="menu" class="hidden absolute top-4 right-0 z-10 mt-5 flex w-screen max-w-max">
+          <div class="text-sm bg-white shadow-lg rounded border overflow-hidden w-32">
+            <%= link_to "Profile", "#", class: "block px-4 py-2 text-sm text-gray-700 hover:bg-navy-dark hover:text-accent-red" %>
+            <%= link_to "Settings", "#", class: "block px-4 py-2 text-sm text-gray-700 hover:bg-navy-dark hover:text-accent-red" %>
+            <%= button_to "Sign out", session_path, method: :delete, class: "w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-navy-dark hover:text-accent-red" %>
+          </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile menu button -->
+      <div class="md:hidden">
+        <button type="button" class="text-gray-700 hover:text-indigo-600 focus:outline-none" data-action="click->dropdown#toggleMobile">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div class="md:hidden hidden" data-dropdown-target="mobileMenu">
+    <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+      <%= link_to "Dashboard", "#", class: "block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-indigo-600 hover:bg-gray-50" %>
+      <%= link_to "Projects", "#", class: "block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-indigo-600 hover:bg-gray-50" %>
+      <%= link_to "Tasks", "#", class: "block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-indigo-600 hover:bg-gray-50" %>
+      <%= link_to "Profile", "#", class: "block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-indigo-600 hover:bg-gray-50" %>
+      <%= link_to "Settings", "#", class: "block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-indigo-600 hover:bg-gray-50" %>
+      <%= button_to "Sign out", session_path, method: :delete, class: "w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-indigo-600 hover:bg-gray-50" %>
+    </div>
+  </div>
+</header>
+

@@ -24,8 +24,11 @@
   </head>
 
   <body>
-    <main class="container mx-auto mt-28 px-5 flex">
+    <%= render "shared/auth_header" if authenticated? %>
+    <%= render "shared/non_auth_header" unless authenticated? %>
+    <div class="flex flex-col min-h-screen bg-gray-50">
       <%= yield %>
-    </main>
+      <%= render "shared/footer" %>
+    </div>
   </body>
 </html>
