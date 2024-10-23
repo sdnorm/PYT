@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :teams
   resources :tournaments
   resources :organizations
   get "/", to: "pages#index", as: :home

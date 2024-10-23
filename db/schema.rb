@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_10_21_185126) do
+ActiveRecord::Schema[8.0].define(version: 2024_10_23_211708) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -37,6 +37,35 @@ ActiveRecord::Schema[8.0].define(version: 2024_10_21_185126) do
     t.index ["user_id"], name: "index_sessions_on_user_id"
   end
 
+  create_table "teams", force: :cascade do |t|
+    t.bigint "organization_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organization_id"], name: "index_teams_on_organization_id"
+  end
+
+  create_table "tournaments", force: :cascade do |t|
+    t.string "name"
+    t.bigint "account_id", null: false
+    t.bigint "organization_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_tournaments_on_account_id"
+    t.index ["organization_id"], name: "index_tournaments_on_organization_id"
+  end
+
+  create_table "user_roles", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "role_type", null: false
+    t.bigint "role_id", null: false
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["role_type", "role_id"], name: "index_user_roles_on_role"
+    t.index ["user_id", "role_type", "role_id", "name"], name: "index_user_roles_on_user_and_role", unique: true
+    t.index ["user_id"], name: "index_user_roles_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email_address", null: false
     t.string "password_digest", null: false
@@ -47,4 +76,8 @@ ActiveRecord::Schema[8.0].define(version: 2024_10_21_185126) do
 
   add_foreign_key "organizations", "accounts"
   add_foreign_key "sessions", "users"
+  add_foreign_key "teams", "organizations"
+  add_foreign_key "tournaments", "accounts"
+  add_foreign_key "tournaments", "organizations"
+  add_foreign_key "user_roles", "users"
 end
