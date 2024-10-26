@@ -7,16 +7,15 @@ class RegistrationsController < ApplicationController
 
   def create
     @user = User.new(registration_params)
-    @account = Account.create!
+    @account = Account.new(name: "My Team")
 
-    if @user.save
-      AccountUser.create!(user: @user, account: @account)
-      UserRole.create!(user: @user, role_type: :admin, account: @account)
-      # @user.add_role(:admin, @account)
-      sign_in(@user)
+    if @user.save && @account.save
+      account_user = AccountUser.create!(user: @user, account: @account)
+      account_user.add_role(:owner)
+      start_new_session_for(@user)
       redirect_to home_path, notice: "Welcome to Play Your Team!"
     else
-      @account.destroy
+      @account.destroy if @account.persisted?
       render :new, status: :unprocessable_entity
     end
   end

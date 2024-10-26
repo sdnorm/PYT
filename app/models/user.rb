@@ -21,16 +21,39 @@ class User < ApplicationRecord
   has_many :accounts, through: :account_users
 
   has_many :user_roles, dependent: :destroy
+  has_many :teams, through: :user_roles, source: :role, source_type: "Team"
 
-  def add_role(role_name, account)
-    user_roles.create!(role_type: role_name.to_sym, name: role_name.to_s, account: account)
+  def add_role(name, context = nil, account)
+    user_roles.create(
+      name: name,
+      role: context,
+      account: account
+    )
   end
 
-  def remove_role(role_name, account)
-    user_roles.find_by(role_type: role_name, account: account)&.destroy
+  def remove_role(name, context = nil, account)
+    user_roles.find_by(
+      name: name,
+      role: context,
+      account: account
+    )&.destroy
   end
 
-  def has_role?(role_name, account)
-    user_roles.exists?(role_type: role_name, account: account)
+  def has_role?(name, context = nil, account)
+    user_roles.exists?(
+      name: name,
+      role: context,
+      account: account
+    )
+  end
+
+  def roles_for_account(account)
+    user_roles.where(account: account)
+  end
+
+  def all_roles
+    user_roles.includes(:account, :role).group_by(&:account).transform_values do |roles|
+      roles.map { |role| { name: role.name, context: role.role } }
+    end
   end
 end
