@@ -7,7 +7,7 @@ class RegistrationsController < ApplicationController
 
   def create
     @user = User.new(registration_params)
-    @account = Account.new(name: "My Team")
+    @account = Account.new(name: "My Team", owner: @user)
 
     if @user.save && @account.save
       account_user = AccountUser.create!(user: @user, account: @account)

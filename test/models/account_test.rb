@@ -7,6 +7,7 @@
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #  account_type :integer
+#  owner_id     :bigint
 #
 require "test_helper"
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_10_26_034914) do
+ActiveRecord::Schema[8.0].define(version: 2024_10_29_193103) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -28,6 +28,8 @@ ActiveRecord::Schema[8.0].define(version: 2024_10_26_034914) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "account_type"
+    t.bigint "owner_id"
+    t.index ["owner_id"], name: "index_accounts_on_owner_id"
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -82,6 +84,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_10_26_034914) do
 
   add_foreign_key "account_users", "accounts"
   add_foreign_key "account_users", "users"
+  add_foreign_key "accounts", "users", column: "owner_id"
   add_foreign_key "sessions", "users"
   add_foreign_key "tournaments", "accounts"
   add_foreign_key "user_roles", "accounts"

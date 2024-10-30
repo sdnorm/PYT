@@ -6,7 +6,7 @@ class RegistrationsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should create user, account, and account_user with owner role" do
+  test "should create user, account, and account_user with owner role -- Full New Registration" do
     assert_difference ["User.count", "Account.count", "AccountUser.count", "UserRole.count"], 1 do
       post registration_url, params: {
         user: {
@@ -29,7 +29,7 @@ class RegistrationsControllerTest < ActionDispatch::IntegrationTest
     assert_equal "owner", user_role.name
     assert_equal account, user_role.account
     assert_equal user, user_role.user
-    assert account_user.owner?
+    assert account.owner?(user)
 
     assert_redirected_to home_path
     assert_equal "Welcome to Play Your Team!", flash[:notice]

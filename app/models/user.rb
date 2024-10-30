@@ -23,6 +23,8 @@ class User < ApplicationRecord
   has_many :user_roles, dependent: :destroy
   has_many :teams, through: :user_roles, source: :role, source_type: "Team"
 
+  has_one :owned_account, class_name: "Account"
+
   def add_role(name, context = nil, account)
     user_roles.create(
       name: name,
