@@ -5,27 +5,17 @@
         Sign in to your account
       </h2>
 
-      <% if alert = flash[:alert] %>
-        <div class="rounded-md bg-red-50 p-4 mb-4">
-          <div class="flex">
-            <div class="ml-3">
-              <p class="text-sm font-medium text-red-800" id="alert"><%= alert %></p>
-            </div>
-          </div>
-        </div>
-      <% end %>
-
-      <% if notice = flash[:notice] %>
-        <div class="rounded-md bg-green-50 p-4 mb-4">
-          <div class="flex">
-            <div class="ml-3">
-              <p class="text-sm font-medium text-green-800" id="notice"><%= notice %></p>
-            </div>
-          </div>
-        </div>
-      <% end %>
-
       <%= form_with url: session_url, class: "space-y-6", data: { turbo: false } do |form| %>
+        <% if flash[:alert].present? %>
+          <div class="rounded-md bg-red-50 p-4 mb-4">
+            <div class="flex">
+              <div class="ml-3">
+                <p class="text-sm font-medium text-red-800" id="alert"><%= flash[:alert] %></p>
+              </div>
+            </div>
+          </div>
+        <% end %>
+
         <div>
           <%= form.label :email_address, "Email address", class: "block text-sm font-medium text-gray-700" %>
           <div class="mt-1">

@@ -1,0 +1,60 @@
+<% if (alert = flash[:alert]) || (notice = flash[:notice]) %>
+  <% 
+    style_map = {
+      alert: {
+        border: "border-red-400",
+        bg: "bg-red-50",
+        text: "text-red-700",
+        hover: "hover:text-red-600",
+        icon_color: "text-red-400"
+      },
+      notice: {
+        border: "border-green-400",
+        bg: "bg-green-50",
+        text: "text-green-700",
+        hover: "hover:text-green-600",
+        icon_color: "text-green-400"
+      }
+    }
+    type = alert ? :alert : :notice
+    message = alert || notice
+    styles = style_map[type]
+  %>
+
+  <div data-controller="alert" 
+       data-alert-dismiss-after-value="3500"
+       class="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 transition-all duration-300"
+       data-transition-enter="transform ease-out duration-300 transition"
+       data-transition-enter-from="translate-y-[-100%] opacity-0"
+       data-transition-enter-to="translate-y-0 opacity-100"
+       data-transition-leave="transform ease-in duration-200 transition"
+       data-transition-leave-from="translate-y-0 opacity-100"
+       data-transition-leave-to="translate-y-[-100%] opacity-0">
+    <div class="border-l-4 <%= styles[:border] %> <%= styles[:bg] %> p-4 shadow-xl max-w-2xl w-full min-w-[32rem]">
+      <div class="flex">
+        <div class="flex-shrink-0">
+          <% if type == :alert %>
+            <svg class="h-5 w-5 <%= styles[:icon_color] %>" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.516-2.625L8.485 2.495zM10 6a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 6zm0 9a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
+            </svg>
+          <% else %>
+            <svg class="h-5 w-5 <%= styles[:icon_color] %>" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+            </svg>
+          <% end %>
+        </div>
+        <div class="ml-3">
+          <p class="text-sm <%= styles[:text] %>" id="<%= type %>"><%= message %></p>
+        </div>
+        <div class="ml-auto pl-3">
+          <button data-action="alert#close" class="<%= styles[:text] %> <%= styles[:hover] %>">
+            <span class="sr-only">Close</span>
+            <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
