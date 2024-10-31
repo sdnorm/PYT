@@ -19,10 +19,8 @@ class User < ApplicationRecord
 
   has_many :account_users, dependent: :destroy
   has_many :accounts, through: :account_users
-
   has_many :user_roles, dependent: :destroy
   has_many :teams, through: :user_roles, source: :role, source_type: "Team"
-
   has_one :owned_account, class_name: "Account"
 
   def add_role(name, context = nil, account)
@@ -63,6 +61,11 @@ class User < ApplicationRecord
     [ first_name, last_name ].compact.join(" ")
   end
 
-  def avatar
+  def initials
+    [ first_name[0], last_name[0] ].compact.join
+  end
+
+  has_one_attached :avatar do |attachable|
+    attachable.variant :thumb, resize_to_limit: [100, 100]
   end
 end

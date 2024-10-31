@@ -6,7 +6,15 @@ Rails.application.routes.draw do
   get "/terms", to: "pages#terms", as: :terms
   get "/privacy", to: "pages#privacy", as: :privacy
   get "/pricing", to: "pages#pricing", as: :pricing
-  get "user/profile", to: "user#profile", as: :user_profile
+
+  resources :users
+  get "profile", to: "user#profile", as: :user_profile
+  get "settings", to: "user#settings", as: :user_settings
+  get "settings/profile", to: "user#settings_profile", as: :user_settings_profile
+  get "settings/security", to: "user#settings_security", as: :user_settings_security
+  get "settings/notifications", to: "user#settings_notifications", as: :user_settings_notifications
+  patch "settings/update_profile", to: "user#update_profile", as: :update_profile
+  patch "settings/update_notifications", to: "user#update_notifications", as: :update_notifications
 
   resource :registration, only: %i[ new create ]
   resource :session

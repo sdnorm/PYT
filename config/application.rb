@@ -25,5 +25,7 @@ module Pyt
     # config.eager_load_paths << Rails.root.join("extras")
     #
     config.session_store :cookie_store, key: "_pyt_session"
+
+    config.active_storage.service = :digital_ocean
   end
 end

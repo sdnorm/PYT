@@ -28,7 +28,7 @@
         <div data-dropdown-target="menu" class="hidden absolute top-4 right-0 z-10 mt-5 flex w-screen max-w-max">
           <div class="text-sm bg-white shadow-lg rounded border overflow-hidden w-32">
             <%= link_to "Profile", user_profile_path, class: "block px-4 py-2 text-sm text-gray-700 hover:text-navy-dark hover:bg-gray-100 hover:underline" %>
-            <%= link_to "Settings", "#", class: "block px-4 py-2 text-sm text-gray-700 hover:text-navy-dark hover:bg-gray-100 hover:underline" %>
+            <%= link_to "Settings", user_settings_path, class: "block px-4 py-2 text-sm text-gray-700 hover:text-navy-dark hover:bg-gray-100 hover:underline" %>
             <%= button_to "Sign out", session_path, method: :delete, class: "w-full text-left px-4 py-2 text-sm text-gray-700 hover:text-navy-dark hover:bg-gray-100 hover:underline" %>
           </div>
           </div>
