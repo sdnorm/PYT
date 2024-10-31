@@ -58,4 +58,11 @@ class User < ApplicationRecord
       roles.map { |role| { name: role.name, context: role.role } }
     end
   end
+
+  def name
+    [ first_name, last_name ].compact.join(" ")
+  end
+
+  def avatar
+  end
 end

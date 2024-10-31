@@ -1,0 +1,66 @@
+<div class="min-h-screen bg-navy-50">
+  <div class="max-w-4xl mx-auto px-4 py-8">
+    <!-- Profile Header -->
+    <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+      <div class="flex items-start gap-6">
+        <!-- Avatar -->
+        <div class="flex-shrink-0">
+          <% if @current_user.avatar&.attached? %>
+            <%= image_tag @current_user.avatar, class: "h-24 w-24 rounded-full object-cover border-2 border-navy-200" %>
+          <% else %>
+            <div class="h-24 w-24 rounded-full bg-navy-100 flex items-center justify-center">
+              <span class="text-2xl font-semibold text-navy-600">
+                <%= @current_user.name.first %>
+              </span>
+            </div>
+          <% end %>
+        </div>
+
+        <!-- User Info -->
+        <div class="flex-1">
+          <div class="flex items-center justify-between">
+            <div>
+              <h1 class="text-2xl font-bold text-navy-900"><%= @current_user.name %></h1>
+              <p class="text-navy-600"><%= @current_user.email_address %></p>
+            </div>
+            <%= link_to "Edit Password", signed_in_edit_password_path, 
+                class: "px-4 py-2 bg-navy-700 text-white rounded-md hover:bg-navy-800 transition-colors" %>
+          </div>
+          
+          <!-- Stats -->
+          <div class="flex gap-6 mt-4">
+            <div class="text-center">
+              <span class="block text-2xl font-bold text-navy-900">254</span>
+              <span class="text-sm text-navy-600">Posts</span>
+            </div>
+            <div class="text-center">
+              <span class="block text-2xl font-bold text-navy-900">14.2k</span>
+              <span class="text-sm text-navy-600">Followers</span>
+            </div>
+            <div class="text-center">
+              <span class="block text-2xl font-bold text-navy-900">135</span>
+              <span class="text-sm text-navy-600">Following</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recent Activity -->
+    <div class="bg-white rounded-lg shadow-lg p-6">
+      <h2 class="text-lg font-semibold text-navy-900 mb-4">Recent Activity</h2>
+      <div class="space-y-4">
+        <% 3.times do %>
+          <div class="flex items-start gap-4 p-4 rounded-lg hover:bg-navy-50 transition-colors">
+            <div class="flex-shrink-0 w-12 h-12 rounded-lg bg-navy-100"></div>
+            <div>
+              <h3 class="font-medium text-navy-900">Activity Title</h3>
+              <p class="text-sm text-navy-600">Activity description goes here...</p>
+              <span class="text-xs text-navy-400">2 hours ago</span>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

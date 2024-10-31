@@ -12,7 +12,7 @@
 #
 one:
   email_address: one@example.com
-  password_digest: one
+  password_digest: <%= BCrypt::Password.create("password") %>
   first_name: One
   last_name: User
   # account: one

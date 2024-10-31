@@ -1,5 +1,6 @@
 class PasswordsController < ApplicationController
-  allow_unauthenticated_access
+  allow_unauthenticated_access except: %i[ signed_in_edit signed_in_update ]
+
   before_action :set_user_by_token, only: %i[ edit update ]
 
   def new
@@ -24,10 +25,35 @@ class PasswordsController < ApplicationController
     end
   end
 
+  def signed_in_edit
+    @current_user = Current.user
+  end
+
+  def signed_in_update
+    @current_user = Current.user
+    puts "GOT TO HERE"
+    if @current_user.authenticate(params[:current_password])
+      puts "AUTHENTICATED"
+      if @current_user.update(password_params)
+        puts "UPDATED"
+        redirect_to user_profile_path, notice: "Password successfully updated."
+      else
+        render :signed_in_edit_password, status: :unprocessable_entity
+      end
+    else
+      flash.now[:alert] = "Current password is incorrect"
+      render :signed_in_edit_password, status: :unprocessable_entity
+    end
+  end
+
   private
     def set_user_by_token
       @user = User.find_by_password_reset_token!(params[:token])
     rescue ActiveSupport::MessageVerifier::InvalidSignature
       redirect_to new_password_url, alert: "Password reset link is invalid or has expired."
+    end
+
+    def password_params
+      params.require(:user).permit(:password, :password_confirmation)
     end
 end

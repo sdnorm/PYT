@@ -13,3 +13,22 @@ module ActiveSupport
     # Add more helper methods to be used by all tests here...
   end
 end
+
+module AuthenticationHelper
+  def sign_in_as(user)
+    session = user.sessions.create!(
+      user_agent: "Rails Testing",
+      ip_address: "0.0.0.0"
+    )
+
+    # For test environment, we can set the encrypted cookie directly
+    encrypted_cookie_value = Rails.application.message_verifier("signed cookie").generate(session.id)
+    cookies[:session_id] = encrypted_cookie_value
+
+    Current.session = session
+  end
+end
+
+class ActionDispatch::IntegrationTest
+  include AuthenticationHelper
+end
