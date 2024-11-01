@@ -1,1 +1,3 @@
-<%= render "user/forms/security_form" %> 
+<%= turbo_frame_tag "settings_content" do %>
+  <%= render "user/forms/security_form" %>
+<% end %>

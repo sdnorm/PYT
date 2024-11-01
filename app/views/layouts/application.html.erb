@@ -23,14 +23,16 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+  <body class="flex flex-col min-h-screen bg-gray-50">
     <%= render "shared/auth_header" if authenticated? %>
     <%= render "shared/non_auth_header" unless authenticated? %>
     <div id="flash">
       <%= render "shared/notices" %>
     </div>
-    <div class="flex flex-col min-h-screen bg-gray-50">
-      <%= yield %>
+    <div class="flex flex-col flex-grow">
+      <main class="flex-1">
+        <%= yield %>
+      </main>
       <%= render "shared/footer" %>
     </div>
   </body>

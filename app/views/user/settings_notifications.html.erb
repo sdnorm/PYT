@@ -1,1 +1,3 @@
-<%= render "user/forms/notifications_form" %> 
+<%= turbo_frame_tag "settings_content" do %>
+  <%= render "user/forms/notifications_form" %>
+<% end %> 

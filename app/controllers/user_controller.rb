@@ -4,7 +4,11 @@ class UserController < ApplicationController
   def settings
     # Default to profile form for both full page and turbo frame requests
     if turbo_frame_request?
-      render "settings_profile"
+      # render "settings_profile"
+      render turbo_stream: [
+        turbo_stream.update("settings_content", partial: "user/forms/profile_form"),
+        turbo_stream.update("settings_nav", partial: "user/settings_nav")
+      ]
     else
       render "settings"
     end
@@ -12,7 +16,11 @@ class UserController < ApplicationController
 
   def settings_profile
     if turbo_frame_request?
-      render "settings_profile"
+      # render "settings_profile"
+      render turbo_stream: [
+        turbo_stream.update("settings_content", partial: "user/forms/profile_form"),
+        turbo_stream.update("settings_nav", partial: "user/settings_nav")
+      ]
     else
       render "settings"
     end
@@ -20,7 +28,11 @@ class UserController < ApplicationController
 
   def settings_security
     if turbo_frame_request?
-      render "settings_security"
+      # render "settings_security"
+      render turbo_stream: [
+        turbo_stream.update("settings_content", partial: "user/forms/security_form"),
+        turbo_stream.update("settings_nav", partial: "user/settings_nav")
+      ]
     else
       render "settings"
     end
@@ -28,7 +40,11 @@ class UserController < ApplicationController
 
   def settings_notifications
     if turbo_frame_request?
-      render "settings_notifications"
+      # render "settings_notifications"
+      render turbo_stream: [
+        turbo_stream.update("settings_content", partial: "user/forms/notifications_form"),
+        turbo_stream.update("settings_nav", partial: "user/settings_nav")
+      ]
     else
       render "settings"
     end
