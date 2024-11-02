@@ -7,7 +7,7 @@ class RegistrationsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create user, account, and account_user with owner role -- Full New Registration" do
-    assert_difference ["User.count", "Account.count", "AccountUser.count", "UserRole.count"], 1 do
+    assert_difference [ "User.count", "Account.count", "AccountUser.count", "UserRole.count" ], 1 do
       post registration_url, params: {
         user: {
           first_name: "John",

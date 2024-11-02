@@ -27,6 +27,12 @@ module AuthenticationHelper
 
     Current.session = session
   end
+
+  def sign_out(user)
+    user.sessions.destroy_all
+    cookies.delete(:session_id)
+    Current.session = nil
+  end
 end
 
 class ActionDispatch::IntegrationTest
