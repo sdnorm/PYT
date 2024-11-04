@@ -14,13 +14,17 @@
 class Player < ApplicationRecord
   belongs_to :user
 
-  encrypts :dob
+  # Let's temporarily comment out encryption to test the basic functionality
+  # encrypts :dob
 
-  after_initialize :set_minor
+  after_create :set_minor
 
   validates :first_name, :last_name, :dob, presence: true
 
+  private
+
   def set_minor
-    self.minor = true if self.dob.present? && self.dob > 18.years.ago
+    return unless dob.present?
+    update_column(:minor, dob.to_date > (Date.current - 18.years))
   end
 end
