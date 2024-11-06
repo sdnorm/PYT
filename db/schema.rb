@@ -63,7 +63,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_04_164732) do
   create_table "players", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
-    t.datetime "dob"
+    t.text "dob"
     t.boolean "minor"
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
