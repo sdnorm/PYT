@@ -50,4 +50,18 @@ Rails.application.configure do
 
   # Raise error when a before_action's only/except options reference missing actions.
   config.action_controller.raise_on_missing_callback_actions = true
+
+  config.active_record.encryption.encrypt_fixtures = true
+  # ActiveRecord::Encryption.config.encrypt_fixtures = true
+
+  # Remove the nested Rails.application.configure do block
+  # config.active_record.encryption.primary_key = "test_primary_key_is_32_bytes_long_pad"
+  # config.active_record.encryption.deterministic_key = "test_deterministic_key_is_32_byte"
+  # config.active_record.encryption.key_derivation_salt = "test_derivation_salt_is_32_bytes_"
+
+  # Enable encryption in test environment
+  config.active_record.encryption.enabled = true
+
+  # Enable support for unencrypted data during transition
+  config.active_record.encryption.support_unencrypted_data = true
 end
