@@ -6,4 +6,4 @@ class ModifyDobColumnType < ActiveRecord::Migration[7.1]
   def down
     change_column :players, :dob, :datetime
   end
-end 
+end

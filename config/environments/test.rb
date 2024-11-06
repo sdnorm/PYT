@@ -61,7 +61,7 @@ Rails.application.configure do
 
   # Enable encryption in test environment
   config.active_record.encryption.enabled = true
-  
+
   # Enable support for unencrypted data during transition
   config.active_record.encryption.support_unencrypted_data = true
 end

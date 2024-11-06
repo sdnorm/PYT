@@ -17,4 +17,4 @@ class Dob
       raise ArgumentError, "Invalid date format"
     end
   end
-end 
+end
